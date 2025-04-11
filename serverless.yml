@@ -8,6 +8,9 @@ provider:
   name: aws
   runtime: nodejs18.x
   region: us-east-1
+  environment:
+    SLACK_BOT_TOKEN: ${param:slackBotToken}
+    SLACK_SIGNING_SECRET: ${param:slackSigningSecret}
 
 functions:
   app:
@@ -22,4 +25,8 @@ plugins:
 
 custom:
   serverless-offline:
-    httpPort: 3000 
+    httpPort: 3000
+
+params:
+  slackBotToken: ${ssm:/slack-fuck-checker/slack-bot-token~true}
+  slackSigningSecret: ${ssm:/slack-fuck-checker/slack-signing-secret~true} 
